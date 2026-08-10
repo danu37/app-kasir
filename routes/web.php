@@ -14,7 +14,11 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TransactionController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('landing.home');
+Route::get('/tentang-kami', [HomeController::class, 'about'])->name('landing.about');
+Route::get('/produk', [HomeController::class, 'products'])->name('landing.products');
+Route::get('/harga', [HomeController::class, 'pricing'])->name('landing.pricing');
+Route::get('/faq', [HomeController::class, 'faq'])->name('landing.faq');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

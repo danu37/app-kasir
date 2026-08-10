@@ -1,0 +1,16 @@
+<svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mockup statistik">
+  <rect width="320" height="200" rx="16" fill="#F7F8FB"/>
+  <rect x="16" y="16" width="140" height="168" rx="12" fill="#fff" stroke="#E7EBF1"/>
+  <rect x="28" y="28" width="70" height="10" rx="3" fill="#1D2433"/>
+  <path d="M36 140c20-40 36-52 52-48s28 28 44 20 24-36 40-44" stroke="#D32F2F" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <circle cx="172" cy="68" r="5" fill="#D32F2F"/>
+  <rect x="168" y="16" width="136" height="78" rx="12" fill="#FFF5F5" stroke="#FFCDD2"/>
+  <rect x="180" y="30" width="50" height="8" rx="2" fill="#D32F2F"/>
+  <rect x="180" y="48" width="28" height="28" rx="6" fill="#EF5350"/>
+  <rect x="216" y="48" width="28" height="28" rx="6" fill="#FFCDD2"/>
+  <rect x="252" y="48" width="28" height="28" rx="6" fill="#B71C1C"/>
+  <rect x="168" y="106" width="136" height="78" rx="12" fill="#fff" stroke="#E7EBF1"/>
+  <rect x="180" y="120" width="80" height="8" rx="2" fill="#1D2433"/>
+  <rect x="180" y="138" width="100" height="6" rx="2" fill="#FFCDD2"/>
+  <rect x="180" y="152" width="70" height="6" rx="2" fill="#FFCDD2"/>
+</svg>

@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'Kasir Mini' }} · Kasir Mini</title>
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
 <aside class="sidebar">
-    <a class="brand" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}"><span class="brand-icon"><i class="ti ti-building-store"></i></span><span><b>Kasir Mini</b><small>Point of Sale</small></span></a>
+    <a class="brand" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}"><span class="brand-icon brand-mark">@include('partials.logo-mark', ['class' => 'logo-mark'])</span><span><b>Kasir Mini</b><small>Point of Sale</small></span></a>
     <div class="nav-label">Menu Utama</div>
     @if(auth()->user()->isAdmin()) <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="ti ti-layout-dashboard"></i>Dashboard</a> @endif
     <a class="nav-link {{ request()->routeIs('cashier.*') ? 'active' : '' }}" href="{{ route('cashier.index') }}"><i class="ti ti-cash-register"></i>Kasir <span class="live">Live</span></a>

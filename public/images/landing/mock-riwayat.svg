@@ -1,0 +1,14 @@
+<svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mockup transaksi dan riwayat">
+  <rect width="320" height="200" rx="16" fill="#F7F8FB"/>
+  <rect x="16" y="16" width="288" height="168" rx="12" fill="#fff" stroke="#E7EBF1"/>
+  <rect x="28" y="28" width="90" height="12" rx="3" fill="#1D2433"/>
+  <rect x="28" y="56" width="288" height="36" rx="8" fill="#FFF5F5"/>
+  <rect x="40" y="66" width="50" height="8" rx="2" fill="#D32F2F"/>
+  <rect x="40" y="78" width="70" height="6" rx="2" fill="#FFCDD2"/>
+  <rect x="230" y="68" width="56" height="14" rx="7" fill="#EAF7ED"/>
+  <rect x="28" y="102" width="288" height="36" rx="8" fill="#fff" stroke="#E7EBF1"/>
+  <rect x="40" y="112" width="50" height="8" rx="2" fill="#1D2433"/>
+  <rect x="40" y="124" width="70" height="6" rx="2" fill="#FFCDD2"/>
+  <rect x="230" y="114" width="56" height="14" rx="7" fill="#E8F1FF"/>
+  <rect x="28" y="148" width="288" height="24" rx="8" fill="#FFEBEE"/>
+</svg>

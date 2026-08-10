@@ -7,3 +7,7 @@
 .login-help a:hover {
     color: var(--red-dark);
 }
+/* Ki logo mark */
+.brand-icon.brand-mark{background:transparent;border:0;padding:0;overflow:hidden;border-radius:12px}
+.brand-icon.brand-mark .logo-mark{width:100%;height:100%;display:block}
+.login-brand .brand-icon.brand-mark{background:transparent;border:0;box-shadow:0 8px 20px rgba(220,38,38,.18)}
