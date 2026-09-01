@@ -23,6 +23,8 @@ Route::get('/faq', [HomeController::class, 'faq'])->name('landing.faq');
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+    Route::get('/auth/google', [\App\Http\Controllers\Auth\SocialiteController::class, 'redirect'])->name('google.login');
+    Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\SocialiteController::class, 'callback'])->name('google.callback');
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
@@ -49,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksi', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/riwayat', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/riwayat/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
+    Route::get('/riwayat/{transaction}/cetak', [TransactionController::class, 'print'])->name('transactions.print');
 
     Route::get('/penjualan', [ReportController::class, 'index'])->name('reports.sales');
     Route::get('/penjualan/export', [ReportController::class, 'export'])->name('reports.sales.export');

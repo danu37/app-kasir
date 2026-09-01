@@ -10,7 +10,7 @@
         </div>
         <div class="lp-hero-stage lp-reveal">
             <div class="lp-illust-bare">
-                <img src="{{ asset('images/landing/hero-pos.png') }}" alt="Ilustrasi tim Kasir Mini" width="520" height="400">
+                <img src="{{ asset('images/landing/hero-pos.png') }}" alt="Ilustrasi tim Kasir Mini" style="border-radius:16px; box-shadow:0 12px 32px -8px rgba(225,29,72,0.15); object-fit:cover;" width="520" height="400">
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="lp-split-visual lp-reveal">
             <figure class="lp-photo lp-photo-wide lp-photo-tint">
-                <img src="{{ asset('images/landing/photo-team.jpg') }}" alt="Tim UMKM berkolaborasi" loading="lazy" width="800" height="500">
+                <img src="{{ asset('images/landing/photo-team.jpg') }}" alt="Tim UMKM berkolaborasi" loading="lazy" style="border-radius:16px; object-fit:cover;" width="800" height="500">
             </figure>
             <div class="lp-split-caption">
                 <strong>Dibangun untuk ritme toko nyata</strong>
@@ -72,7 +72,7 @@
         <div class="lp-split" style="margin-bottom:40px">
             <div class="lp-split-visual lp-reveal">
                 <figure class="lp-photo lp-photo-wide">
-                    <img src="{{ asset('images/landing/photo-owner.jpg') }}" alt="Pemilik usaha di toko" loading="lazy" width="800" height="500">
+                    <img src="{{ asset('images/landing/photo-owner.jpg') }}" alt="Pemilik usaha di toko" loading="lazy" style="border-radius:16px; object-fit:cover;" width="800" height="500">
                 </figure>
             </div>
             <div class="lp-reveal">
@@ -123,7 +123,7 @@
         <div class="lp-cta-actions">
             <a class="lp-btn light xl" href="{{ route('landing.products') }}">Lihat produk</a>
             @guest
-                <a class="lp-btn outline-light lg" href="{{ route('register') }}">Daftar sekarang</a>
+            <a class="lp-btn outline-light lg" href="{{ route('register') }}">Daftar sekarang</a>
             @endguest
         </div>
     </div>

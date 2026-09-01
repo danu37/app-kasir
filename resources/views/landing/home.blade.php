@@ -12,15 +12,15 @@
             <p class="lp-hero-lead">Kelola penjualan, inventori, dan laporan dalam satu platform yang sederhana — dirancang agar toko Anda bergerak lebih cepat setiap hari.</p>
             <div class="lp-hero-cta">
                 @auth
-                    <a class="lp-btn primary xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">
-                        <i class="ti ti-arrow-right"></i> Buka aplikasi
-                    </a>
-                    <a class="lp-btn ghost lg" href="{{ route('landing.products') }}">Lihat produk</a>
+                <a class="lp-btn primary xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">
+                    <i class="ti ti-arrow-right"></i> Buka aplikasi
+                </a>
+                <a class="lp-btn ghost lg" href="{{ route('landing.products') }}">Lihat produk</a>
                 @else
-                    <a class="lp-btn primary xl" href="{{ route('register') }}">
-                        Mulai gratis <i class="ti ti-arrow-right"></i>
-                    </a>
-                    <a class="lp-btn ghost lg" href="{{ route('login') }}">Masuk ke akun</a>
+                <a class="lp-btn primary xl" href="{{ route('register') }}">
+                    Mulai gratis <i class="ti ti-arrow-right"></i>
+                </a>
+                <a class="lp-btn ghost lg" href="{{ route('login') }}">Masuk ke akun</a>
                 @endauth
             </div>
             <div class="lp-hero-trust">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="lp-illust-bare lp-illust-float">
-                    <img src="{{ asset('images/landing/hero-pos.png') }}" alt="Ilustrasi Kasir Mini" width="640" height="480">
+                    <img src="{{ asset('images/landing/hero-pos.png') }}" alt="Sistem Kasir Modern" style="border-radius:16px; box-shadow:0 12px 32px -8px rgba(225,29,72,0.15); object-fit:cover;" width="640" height="480">
                 </div>
                 <div class="lp-float-card lp-float-b">
                     <i class="ti ti-chart-arrows-vertical"></i>
@@ -135,17 +135,17 @@
         <div class="lp-split-visual lp-reveal">
             <div class="lp-mood-grid">
                 <figure class="lp-photo lp-photo-wash lp-photo-tint">
-                    <img src="{{ asset('images/landing/photo-cashier.jpg') }}" alt="Pembayaran di kasir toko" loading="lazy" width="700" height="900">
+                    <img src="{{ asset('images/landing/photo-cashier.jpg') }}" alt="Pembayaran di kasir toko" loading="lazy" style="border-radius:16px; object-fit:cover;" width="700" height="900">
                     <figcaption class="lp-photo-label">
                         <strong>Kasir yang lebih ringan</strong>
                         <span>Transaksi cepat tanpa antrean bertele-tele</span>
                     </figcaption>
                 </figure>
                 <figure class="lp-photo">
-                    <img src="{{ asset('images/landing/photo-shop.jpg') }}" alt="Suasana toko ritel" loading="lazy" width="500" height="400">
+                    <img src="{{ asset('images/landing/photo-shop.jpg') }}" alt="Suasana toko ritel" loading="lazy" style="border-radius:16px; object-fit:cover;" width="500" height="400">
                 </figure>
                 <figure class="lp-photo">
-                    <img src="{{ asset('images/landing/photo-owner.jpg') }}" alt="Pemilik usaha melayani pelanggan" loading="lazy" width="500" height="400">
+                    <img src="{{ asset('images/landing/photo-owner.jpg') }}" alt="Pemilik usaha melayani pelanggan" loading="lazy" style="border-radius:16px; object-fit:cover;" width="500" height="400">
                 </figure>
             </div>
         </div>
@@ -174,10 +174,10 @@
         </div>
         <div class="lp-cta-actions">
             @guest
-                <a class="lp-btn light xl" href="{{ route('register') }}"><i class="ti ti-user-plus"></i> Buat akun gratis</a>
-                <a class="lp-btn outline-light lg" href="{{ route('landing.faq') }}">Baca FAQ</a>
+            <a class="lp-btn light xl" href="{{ route('register') }}"><i class="ti ti-user-plus"></i> Buat akun gratis</a>
+            <a class="lp-btn outline-light lg" href="{{ route('landing.faq') }}">Baca FAQ</a>
             @else
-                <a class="lp-btn light xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">Masuk aplikasi</a>
+            <a class="lp-btn light xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">Masuk aplikasi</a>
             @endguest
         </div>
     </div>

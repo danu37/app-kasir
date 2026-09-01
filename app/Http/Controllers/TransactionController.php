@@ -9,12 +9,15 @@ class TransactionController extends Controller
 {
     public function index(Request $request)
     {
-        $transactions = Transaction::with('user')->when($request->filled('q'), fn ($q) => $q->where('id', $request->q)->orWhereDate('tanggal', $request->q))->latest('tanggal')->paginate(15)->withQueryString();
+        $transactions = Transaction::with('user')->when($request->filled('q'), fn($q) => $q->where('id', $request->q)->orWhereDate('tanggal', $request->q))->latest('tanggal')->paginate(15)->withQueryString();
         $totals = ['count' => Transaction::count(), 'total' => Transaction::where('status', 'completed')->sum('total'), 'change' => Transaction::where('status', 'completed')->sum('kembalian')];
         return view('transactions.index', compact('transactions', 'totals'));
     }
 
-    public function create() { return view('transactions.form'); }
+    public function create()
+    {
+        return view('transactions.form');
+    }
 
     public function store(Request $request)
     {
@@ -30,5 +33,11 @@ class TransactionController extends Controller
     {
         $transaction->load(['details.product', 'user']);
         return view('transactions.show', compact('transaction'));
+    }
+
+    public function print(Transaction $transaction)
+    {
+        $transaction->load(['details.product', 'user']);
+        return view('transactions.print', compact('transaction'));
     }
 }

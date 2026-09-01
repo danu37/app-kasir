@@ -9,7 +9,7 @@
             <p>Dari kasir live hingga laporan penjualan — semua alur penting tersedia dalam satu sistem terintegrasi.</p>
         </div>
         <figure class="lp-photo lp-photo-wide lp-photo-tint lp-reveal">
-            <img src="{{ asset('images/landing/photo-laptop.jpg') }}" alt="Dashboard dan laporan di laptop" loading="lazy" width="800" height="500">
+            <img src="{{ asset('images/landing/photo-laptop.jpg') }}" alt="Dashboard dan laporan di laptop" loading="lazy" style="border-radius:16px; object-fit:cover;" width="800" height="500">
         </figure>
     </div>
 </section>
@@ -26,7 +26,7 @@
             <article class="lp-show-row lp-reveal">
                 <div class="lp-show-media">
                     <figure class="lp-photo">
-                        <img src="{{ asset('images/landing/photo-cashier.jpg') }}" alt="Kasir Live" loading="lazy" width="640" height="440">
+                        <img src="{{ asset('images/landing/photo-cashier.jpg') }}" alt="Kasir Live" loading="lazy" style="border-radius:12px; object-fit:cover;" width="640" height="440">
                     </figure>
                 </div>
                 <div class="lp-show-copy">
@@ -39,7 +39,7 @@
             <article class="lp-show-row lp-reveal">
                 <div class="lp-show-media">
                     <figure class="lp-photo">
-                        <img src="{{ asset('images/landing/photo-inventory.jpg') }}" alt="Manajemen Barang" loading="lazy" width="640" height="440">
+                        <img src="{{ asset('images/landing/photo-inventory.jpg') }}" alt="Manajemen Barang" loading="lazy" style="border-radius:12px; object-fit:cover;" width="640" height="440">
                     </figure>
                 </div>
                 <div class="lp-show-copy">
@@ -52,7 +52,7 @@
             <article class="lp-show-row lp-reveal">
                 <div class="lp-show-media">
                     <figure class="lp-photo">
-                        <img src="{{ asset('images/landing/photo-laptop.jpg') }}" alt="Dashboard & laporan" loading="lazy" width="640" height="440">
+                        <img src="{{ asset('images/landing/photo-laptop.jpg') }}" alt="Dashboard & laporan" loading="lazy" style="border-radius:12px; object-fit:cover;" width="640" height="440">
                     </figure>
                 </div>
                 <div class="lp-show-copy">
@@ -65,7 +65,7 @@
             <article class="lp-show-row lp-reveal">
                 <div class="lp-show-media">
                     <figure class="lp-photo">
-                        <img src="{{ asset('images/landing/photo-shop.jpg') }}" alt="Operasional toko" loading="lazy" width="640" height="440">
+                        <img src="{{ asset('images/landing/photo-shop.jpg') }}" alt="Operasional toko" loading="lazy" style="border-radius:12px; object-fit:cover;" width="640" height="440">
                     </figure>
                 </div>
                 <div class="lp-show-copy">
@@ -126,10 +126,10 @@
         </div>
         <div class="lp-cta-actions">
             @guest
-                <a class="lp-btn light xl" href="{{ route('register') }}"><i class="ti ti-user-plus"></i> Daftar</a>
-                <a class="lp-btn outline-light lg" href="{{ route('login') }}">Masuk</a>
+            <a class="lp-btn light xl" href="{{ route('register') }}"><i class="ti ti-user-plus"></i> Daftar</a>
+            <a class="lp-btn outline-light lg" href="{{ route('login') }}">Masuk</a>
             @else
-                <a class="lp-btn light xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">Buka aplikasi</a>
+            <a class="lp-btn light xl" href="{{ route(auth()->user()->isAdmin() ? 'dashboard' : 'cashier.index') }}">Buka aplikasi</a>
             @endguest
         </div>
     </div>

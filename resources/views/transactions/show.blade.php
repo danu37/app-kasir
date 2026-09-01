@@ -1,4 +1,35 @@
 @extends('layouts.app')
 @section('content')
-<div class="page-head"><div><p class="muted">Detail transaksi #{{ $transaction->id }}</p></div><div class="button-group"><button class="btn outline" onclick="window.print()"><i class="ti ti-printer"></i>Cetak</button><a class="btn primary" href="{{ route('cashier.index') }}"><i class="ti ti-plus"></i>Transaksi Baru</a></div></div><div class="receipt"><div class="receipt-head"><div><h2>Kasir Mini</h2><p>Struk transaksi penjualan</p></div><span class="badge success">Selesai</span></div><div class="receipt-meta"><span>No. Transaksi <b>#{{ $transaction->id }}</b></span><span>Waktu <b>{{ $transaction->tanggal->format('d M Y H:i') }}</b></span><span>Kasir <b>{{ $transaction->user->name }}</b></span></div>@if($transaction->details->isNotEmpty())<div class="table-wrap"><table><thead><tr><th>Produk</th><th>Qty</th><th>Harga</th><th>Subtotal</th></tr></thead><tbody>@foreach($transaction->details as $detail)<tr><td>{{ $detail->product->nama_barang }}</td><td>{{ $detail->jumlah }}</td><td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td><td class="amount">Rp {{ number_format($detail->subtotal, 0, ',', '.') }}</td></tr>@endforeach</tbody></table></div>@endif<div class="receipt-total"><span>Total</span><strong>Rp {{ number_format($transaction->total, 0, ',', '.') }}</strong><span>Dibayar</span><b>Rp {{ number_format($transaction->bayar, 0, ',', '.') }}</b><span>Kembalian</span><b class="green-text">Rp {{ number_format($transaction->kembalian, 0, ',', '.') }}</b></div>@if($transaction->catatan)<p class="receipt-note">Catatan: {{ $transaction->catatan }}</p>@endif</div>
+<div class="page-head">
+    <div>
+        <p class="muted">Detail transaksi #{{ $transaction->id }}</p>
+    </div>
+    <div class="button-group"><a class="btn outline" target="_blank" href="{{ route('transactions.print', $transaction) }}"><i class="ti ti-receipt"></i>Cetak Thermal</a><button class="btn outline" onclick="window.print()"><i class="ti ti-printer"></i>Cetak</button><a class="btn primary" href="{{ route('cashier.index') }}"><i class="ti ti-plus"></i>Transaksi Baru</a></div>
+</div>
+<div class="receipt">
+    <div class="receipt-head">
+        <div>
+            <h2>Kasir Mini</h2>
+            <p>Struk transaksi penjualan</p>
+        </div><span class="badge success">Selesai</span>
+    </div>
+    <div class="receipt-meta"><span>No. Transaksi <b>#{{ $transaction->id }}</b></span><span>Waktu <b>{{ $transaction->tanggal->format('d M Y H:i') }}</b></span><span>Kasir <b>{{ $transaction->user->name }}</b></span></div>@if($transaction->details->isNotEmpty())<div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Qty</th>
+                    <th>Harga</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>@foreach($transaction->details as $detail)<tr>
+                    <td>{{ $detail->product->nama_barang }}</td>
+                    <td>{{ $detail->jumlah }}</td>
+                    <td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
+                    <td class="amount">Rp {{ number_format($detail->subtotal, 0, ',', '.') }}</td>
+                </tr>@endforeach</tbody>
+        </table>
+    </div>@endif<div class="receipt-total"><span>Total</span><strong>Rp {{ number_format($transaction->total, 0, ',', '.') }}</strong><span>Dibayar</span><b>Rp {{ number_format($transaction->bayar, 0, ',', '.') }}</b><span>Kembalian</span><b class="green-text">Rp {{ number_format($transaction->kembalian, 0, ',', '.') }}</b></div>@if($transaction->catatan)<p class="receipt-note">Catatan: {{ $transaction->catatan }}</p>@endif
+</div>
 @endsection

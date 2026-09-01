@@ -1,10 +1,110 @@
 @extends('layouts.app')
 @section('content')
-<div class="page-head"><div><p class="muted">Pilih barang dan proses pembayaran pelanggan</p></div><a href="{{ route('transactions.index') }}" class="btn outline"><i class="ti ti-history"></i>Riwayat</a></div>
-<form method="POST" action="{{ route('cashier.store') }}" id="cashier-form">@csrf<div class="cashier-grid"><div class="panel product-picker"><div class="panel-head"><h2>Daftar Produk</h2><input id="product-search" class="small-search" placeholder="Cari produk..."></div><div class="product-grid" id="product-grid">@foreach($products as $product)<button type="button" class="product-card" data-id="{{ $product->id }}" data-name="{{ strtolower($product->nama_barang) }}" data-price="{{ $product->harga }}" data-stock="{{ $product->stok }}"><span class="product-picture"><i class="ti ti-package"></i></span><b>{{ $product->nama_barang }}</b><small>Stok {{ $product->stok }}</small><strong>Rp {{ number_format($product->harga, 0, ',', '.') }}</strong></button>@endforeach</div></div><div class="panel cart-panel"><div class="panel-head"><h2>Keranjang</h2><span class="badge" id="cart-count">0 item</span></div><div id="cart-items" class="cart-items"><div class="empty">Pilih produk untuk mulai transaksi.</div></div><div class="cart-summary"><div><span>Subtotal</span><b id="subtotal">Rp 0</b></div><label>Diskon (%)<input type="number" name="discount" id="discount" min="0" max="100" value="0"></label><div><span>Total Bayar</span><strong id="total">Rp 0</strong></div><label>Nominal Bayar<input type="number" name="bayar" id="bayar" min="0" step="1000" required></label><div class="change"><span>Kembalian</span><b id="change">Rp 0</b></div></div><div id="cart-hidden"></div><button class="btn primary full" type="submit"><i class="ti ti-credit-card"></i>Proses Transaksi</button></div></div></form>
+<div class="page-head">
+    <div>
+        <p class="muted">Pilih barang dan proses pembayaran pelanggan</p>
+    </div><a href="{{ route('transactions.index') }}" class="btn outline"><i class="ti ti-history"></i>Riwayat</a>
+</div>
+<form method="POST" action="{{ route('cashier.store') }}" id="cashier-form">@csrf<div class="cashier-grid">
+        <div class="panel product-picker">
+            <div class="panel-head">
+                <h2>Daftar Produk</h2><input id="product-search" class="small-search" placeholder="Cari produk...">
+            </div>
+            <div class="product-grid" id="product-grid">@foreach($products as $product)<button type="button" class="product-card" data-id="{{ $product->id }}" data-name="{{ strtolower($product->nama_barang) }}" data-price="{{ $product->harga }}" data-stock="{{ $product->stok }}"><span class="product-picture"><i class="ti ti-package"></i></span><b>{{ $product->nama_barang }}</b><small>Stok {{ $product->stok }}</small><strong>Rp {{ number_format($product->harga, 0, ',', '.') }}</strong></button>@endforeach</div>
+        </div>
+        <div class="panel cart-panel">
+            <div class="panel-head">
+                <h2>Keranjang</h2><span class="badge" id="cart-count">0 item</span>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <div class="empty">Pilih produk untuk mulai transaksi.</div>
+            </div>
+            <div class="cart-summary">
+                <div><span>Subtotal</span><b id="subtotal">Rp 0</b></div><label>Diskon (%)<input type="number" name="discount" id="discount" min="0" max="100" value="0"></label>
+                <div><span>Total Bayar</span><strong id="total">Rp 0</strong></div><label>Nominal Bayar<input type="number" name="bayar" id="bayar" min="0" step="500" required></label>
+                <div class="quick-cash"><button type="button" class="btn outline small" onclick="setCash('exact')">Uang Pas</button><button type="button" class="btn outline small" onclick="setCash(20000)">20Rb</button><button type="button" class="btn outline small" onclick="setCash(50000)">50Rb</button><button type="button" class="btn outline small" onclick="setCash(100000)">100Rb</button></div>
+                <div class="change"><span>Kembalian</span><b id="change">Rp 0</b></div>
+            </div>
+            <div id="cart-hidden"></div><button class="btn primary full" type="submit"><i class="ti ti-credit-card"></i>Proses Transaksi</button>
+        </div>
+    </div>
+</form>
 @endsection
 @push('scripts')<script>
-const products=[...document.querySelectorAll('.product-card')], cart=new Map(), money=n=>'Rp '+new Intl.NumberFormat('id-ID').format(n); const discount=document.querySelector('#discount'), bayar=document.querySelector('#bayar');
-function render(){let subtotal=0,count=0,html='';cart.forEach((item,id)=>{subtotal+=item.price*item.qty;count+=item.qty;html+=`<div class="cart-line"><div><b>${item.name}</b><small>${money(item.price)} × ${item.qty}</small></div><div class="qty"><button type="button" onclick="changeQty(${id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeQty(${id},1)">+</button></div></div>`});document.querySelector('#cart-items').innerHTML=html||'<div class="empty">Pilih produk untuk mulai transaksi.</div>';const total=Math.max(0,subtotal-Math.round(subtotal*(+discount.value||0)/100));document.querySelector('#subtotal').textContent=money(subtotal);document.querySelector('#total').textContent=money(total);document.querySelector('#cart-count').textContent=count+' item';document.querySelector('#change').textContent=money(Math.max(0,(+bayar.value||0)-total));document.querySelector('#cart-hidden').innerHTML=[...cart].map(([id,item],i)=>`<input type="hidden" name="cart[${i}][id]" value="${id}"><input type="hidden" name="cart[${i}][qty]" value="${item.qty}">`).join('')}
-function changeQty(id,d){const item=cart.get(id);item.qty=Math.max(0,Math.min(item.stock,item.qty+d));if(!item.qty)cart.delete(id);render()} products.forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.id;const item=cart.get(id)||{name:el.querySelector('b').textContent,price:+el.dataset.price,stock:+el.dataset.stock,qty:0};if(item.qty<item.stock)item.qty++;cart.set(id,item);render()}));document.querySelector('#product-search').addEventListener('input',e=>products.forEach(p=>p.hidden=!p.dataset.name.includes(e.target.value.toLowerCase())));discount.addEventListener('input',render);bayar.addEventListener('input',render);document.querySelector('#cashier-form').addEventListener('submit',e=>{if(!cart.size){e.preventDefault();alert('Keranjang masih kosong.')}});render();
-</script>@endpush
+    const products = [...document.querySelectorAll('.product-card')],
+        cart = new Map(),
+        money = n => 'Rp ' + new Intl.NumberFormat('id-ID').format(n);
+    const discount = document.querySelector('#discount'),
+        bayar = document.querySelector('#bayar');
+    let currentTotal = 0;
+
+    function render() {
+        let subtotal = 0,
+            count = 0,
+            html = '';
+        cart.forEach((item, id) => {
+            subtotal += item.price * item.qty;
+            count += item.qty;
+            html += `<div class="cart-line"><div><b>${item.name}</b><small>${money(item.price)} × ${item.qty}</small></div><div class="qty"><button type="button" onclick="changeQty(${id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeQty(${id},1)">+</button></div></div>`
+        });
+        document.querySelector('#cart-items').innerHTML = html || '<div class="empty">Pilih produk untuk mulai transaksi.</div>';
+        const total = Math.max(0, subtotal - Math.round(subtotal * (+discount.value || 0) / 100));
+        currentTotal = total;
+        document.querySelector('#subtotal').textContent = money(subtotal);
+        document.querySelector('#total').textContent = money(total);
+        document.querySelector('#cart-count').textContent = count + ' item';
+        document.querySelector('#change').textContent = money(Math.max(0, (+bayar.value || 0) - total));
+        document.querySelector('#cart-hidden').innerHTML = [...cart].map(([id, item], i) => `<input type="hidden" name="cart[${i}][id]" value="${id}"><input type="hidden" name="cart[${i}][qty]" value="${item.qty}">`).join('')
+    }
+
+    function changeQty(id, d) {
+        const item = cart.get(id);
+        item.qty = Math.max(0, Math.min(item.stock, item.qty + d));
+        if (!item.qty) cart.delete(id);
+        render()
+    }
+    products.forEach(el => el.addEventListener('click', () => {
+        const id = el.dataset.id;
+        const item = cart.get(id) || {
+            name: el.querySelector('b').textContent,
+            price: +el.dataset.price,
+            stock: +el.dataset.stock,
+            qty: 0
+        };
+        if (item.qty < item.stock) item.qty++;
+        cart.set(id, item);
+        render()
+    }));
+    document.querySelector('#product-search').addEventListener('input', e => products.forEach(p => p.hidden = !p.dataset.name.includes(e.target.value.toLowerCase())));
+    discount.addEventListener('input', render);
+    bayar.addEventListener('input', render);
+    document.querySelector('#cashier-form').addEventListener('submit', e => {
+        if (!cart.size) {
+            e.preventDefault();
+            alert('Keranjang masih kosong.')
+        }
+    });
+    window.setCash = function(val) {
+        if (val === 'exact') {
+            bayar.value = currentTotal;
+        } else {
+            bayar.value = val;
+        }
+        render();
+    };
+    render();
+</script>
+<style>
+    .quick-cash {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0;
+    }
+
+    .quick-cash .btn {
+        flex: 1;
+        padding: 6px;
+        font-size: 12px;
+    }
+</style>
+@endpush
